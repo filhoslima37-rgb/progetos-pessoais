@@ -1,0 +1,6 @@
+# Python and local data
+__pycache__/
+.pytest_cache/
+.pytest-run-temp/
+*.py[cod]
+*.db

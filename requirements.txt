@@ -1,1 +1,5 @@
-requirements.txt
+# O hash PBKDF2 usa hashlib, da biblioteca padrão do Python.
+# Streamlit usa pandas nos graficos. XLSX e PDF sao gerados com a biblioteca padrao.
+pandas>=2.0
+pytest>=8.0
+streamlit>=1.40
