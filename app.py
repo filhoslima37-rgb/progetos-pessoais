@@ -209,7 +209,7 @@ else:
 
 st.subheader("Relatório financeiro mensal")
 relatorio = obter_relatorio(
-    usuario_id, data_inicio, data_fim, categoria=categoria_sql
+    usuario_id, data_inicio, data_fim, categoria=categoria_sql, tipo=tipo_sql
 )
 if relatorio["mensal"]:
     tabela_mensal = pd.DataFrame(relatorio["mensal"]).rename(
@@ -229,7 +229,9 @@ col_excel, col_pdf = st.columns(2)
 with col_excel:
     st.download_button(
         "Exportar para Excel",
-        data=gerar_excel(usuario_id, data_inicio, data_fim, categoria_sql),
+        data=gerar_excel(
+            usuario_id, data_inicio, data_fim, categoria_sql, tipo=tipo_sql
+        ),
         file_name="relatorio_financeiro.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         use_container_width=True,
@@ -237,7 +239,9 @@ with col_excel:
 with col_pdf:
     st.download_button(
         "Baixar relatorio PDF",
-        data=gerar_pdf(usuario_id, data_inicio, data_fim, categoria_sql),
+        data=gerar_pdf(
+            usuario_id, data_inicio, data_fim, categoria_sql, tipo=tipo_sql
+        ),
         file_name="relatorio_financeiro.pdf",
         mime="application/pdf",
         use_container_width=True,

@@ -104,7 +104,7 @@ Para criar um executável local de demonstração em Windows 64 bits, execute `b
 Para executar a suíte existente:
 
 ```powershell
-py -m pytest test_calculos_basicos.py test_services.py
+py -m pytest --basetemp=.pytest-run-temp test_calculos_basicos.py test_services.py
 ```
 
 Os testes usam bancos temporários.

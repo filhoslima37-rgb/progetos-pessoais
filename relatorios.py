@@ -9,7 +9,10 @@ from zipfile import ZIP_DEFLATED, ZipFile
 from services import calcular_totais, listar_transacoes
 
 
-def obter_relatorio(usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None):
+def obter_relatorio(
+    usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None,
+    tipo=None,
+):
     """Monta resumo e totais mensais somente com dados do usuario autenticado."""
     transacoes = listar_transacoes(
         usuario_id,
@@ -18,12 +21,17 @@ def obter_relatorio(usuario_id, data_inicio=None, data_fim=None, categoria=None,
         data_fim=data_fim,
         categoria=categoria,
     )
+    if tipo is not None:
+        if tipo not in ("receita", "despesa"):
+            raise ValueError("Tipo invalido.")
+        transacoes = [item for item in transacoes if item["tipo"] == tipo]
     resumo = calcular_totais(
         usuario_id,
         data_inicio,
         data_fim,
         caminho=caminho,
         categoria=categoria,
+        tipo=tipo,
     )
 
     meses = defaultdict(lambda: {"receitas": 0.0, "despesas": 0.0, "saldo": 0.0})
@@ -89,9 +97,14 @@ def _planilha_xml(linhas):
     )
 
 
-def gerar_excel(usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None):
+def gerar_excel(
+    usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None,
+    tipo=None,
+):
     """Gera um arquivo XLSX em memoria com transacoes e resumos do usuario."""
-    relatorio = obter_relatorio(usuario_id, data_inicio, data_fim, categoria, caminho)
+    relatorio = obter_relatorio(
+        usuario_id, data_inicio, data_fim, categoria, caminho, tipo
+    )
     linhas_transacoes = [["ID", "Data", "Descricao", "Tipo", "Categoria", "Valor"]]
     linhas_transacoes.extend(
         [
@@ -188,14 +201,20 @@ def _literal_pdf(texto):
     return b"(" + conteudo + b")"
 
 
-def gerar_pdf(usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None):
+def gerar_pdf(
+    usuario_id, data_inicio=None, data_fim=None, categoria=None, caminho=None,
+    tipo=None,
+):
     """Gera relatorio PDF paginado com totais e transacoes do usuario."""
-    relatorio = obter_relatorio(usuario_id, data_inicio, data_fim, categoria, caminho)
+    relatorio = obter_relatorio(
+        usuario_id, data_inicio, data_fim, categoria, caminho, tipo
+    )
     resumo = relatorio["resumo"]
     linhas = [
         "Relatorio financeiro",
         f"Periodo: {data_inicio or 'inicio'} a {data_fim or 'hoje'}",
         f"Categoria: {categoria or 'Todas'}",
+        f"Tipo: {tipo or 'Todos'}",
         f"Receitas: R$ {resumo['receitas']:.2f}",
         f"Despesas: R$ {resumo['despesas']:.2f}",
         f"Saldo: R$ {resumo['saldo']:.2f}",
