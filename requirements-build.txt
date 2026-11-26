@@ -1,0 +1,3 @@
+# Dependencias usadas somente para criar o executavel Windows.
+-r requirements.txt
+pyinstaller>=6.10

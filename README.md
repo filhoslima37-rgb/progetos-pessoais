@@ -40,6 +40,20 @@ Para demonstrar a aplicacao com dados ficticios e uma base separada, execute
 com usuario `demo` e senha `DemoFinanceiro2026!`. O banco `financeiro_demo.db`
 nao contem nem altera os dados reais.
 
+### Executavel Windows da demonstracao
+
+Para gerar um executavel independente (Windows 64 bits), execute
+`build_demo_exe.bat`. O build instala os pacotes listados em
+`requirements-build.txt` e grava o resultado em `dist/FinanceiroDemo.exe`.
+Abra o executavel para iniciar o dashboard no navegador em
+`http://localhost:8766`. A base demonstrativa fica em
+`%LOCALAPPDATA%\FinanceiroDemo\financeiro_demo.db`, separada do banco real.
+Mantenha o console aberto enquanto usa a demonstracao; feche-o para encerrar.
+
+O executavel e um artefato de distribuicao local e nao e versionado no Git.
+Para compilar em Windows, use Windows e uma instalacao Python compativel com
+PyInstaller.
+
 Crie uma conta ou entre na tela inicial. Os downloads respeitam o periodo e a
 categoria selecionados e incluem somente transacoes da conta autenticada.
 Os arquivos XLSX e PDF sao gerados em memoria, sem gravar copias no projeto.
