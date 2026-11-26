@@ -3,6 +3,10 @@
 Aplicacao em Python com Streamlit e SQLite, com autenticacao, isolamento de
 transacoes por usuario e relatorios financeiros.
 
+O sistema permite controlar receitas e despesas, acompanhar metas de economia e
+consultar relatorios mensais. Os dados ficam no SQLite e cada conta acessa
+somente suas proprias transacoes e metas.
+
 ## Recursos
 
 - Dashboard autenticado com saldo, receitas, despesas e evolucao mensal.
@@ -27,6 +31,9 @@ No terminal, dentro da pasta do projeto:
 py -m pip install -r requirements.txt
 py -m streamlit run app.py
 ```
+
+No Windows, depois de instalar as dependencias, tambem e possivel iniciar com
+duplo clique em `iniciar_sistema.bat`.
 
 Crie uma conta ou entre na tela inicial. Os downloads respeitam o periodo e a
 categoria selecionados e incluem somente transacoes da conta autenticada.
