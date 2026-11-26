@@ -1,67 +1,79 @@
-# Sistema financeiro
+# Controle financeiro
 
-Aplicacao em Python com Streamlit e SQLite, com autenticacao, isolamento de
-transacoes por usuario e relatorios financeiros.
+Aplicação local de controle financeiro feita em Python, Streamlit e SQLite. Permite registrar receitas e despesas, acompanhar metas e exportar relatórios por período, categoria e tipo.
 
-O sistema permite controlar receitas e despesas, acompanhar metas de economia e
-consultar relatorios mensais. Os dados ficam no SQLite e cada conta acessa
-somente suas proprias transacoes e metas.
+## Visão geral
+
+A tela principal reúne os indicadores do período, a tabela de transações e o gráfico mensal. A seção de relatórios apresenta o resumo mensal e os botões para baixar os arquivos Excel e PDF.
+
+## Capturas de tela
+
+### Login
+
+![Tela de login](docs/screenshots/login.png)
+
+### Transações por mês
+
+![Gráfico de receitas e despesas por mês](docs/screenshots/transacoes-mensais.png)
+
+### Relatório mensal
+
+![Resumo financeiro mensal e exportações](docs/screenshots/relatorio-mensal.png)
+
+### Metas financeiras
+
+![Seção de metas financeiras](docs/screenshots/metas-financeiras.png)
 
 ## Recursos
 
-- Dashboard autenticado com saldo, receitas, despesas e evolucao mensal.
-- Cadastro, edicao e exclusao de transacoes por usuario.
-- Categoria, tipo e intervalo de datas como filtros.
-- Relatorio mensal com receitas, despesas e saldo.
-- Metas financeiras por usuario, com prazo, aportes, progresso, edicao e exclusao.
-- Exportacao das transacoes e dos resumos para Excel (`.xlsx`) e PDF (`.pdf`).
-- Hash de senha PBKDF2-SHA256; senhas nao sao armazenadas em texto puro.
+- Conta de usuário com senha armazenada em hash PBKDF2-SHA256.
+- Cadastro, edição e exclusão de transações e metas.
+- Filtros de tipo, categoria e intervalo de datas no dashboard, tabela e relatórios Excel/PDF.
+- Banco SQLite e consultas de transações e metas limitadas ao usuário autenticado.
+- Exportação Excel e PDF gerada em memória.
 
-O modulo `services.py` centraliza as consultas financeiras com escopo de dono.
-`relatorios.py` reutiliza esses servicos para montar os relatorios e arquivos.
-`metas.py` gerencia metas e valores economizados, sempre vinculados ao usuario.
-`database.py` cria e migra o esquema, incluindo a categoria `Geral` para os
-registros antigos.
+## Executar localmente
 
-## Instalar e executar
+Requer Python compatível com as dependências listadas em `requirements.txt`.
 
-No terminal, dentro da pasta do projeto:
-
-```bash
+```powershell
 py -m pip install -r requirements.txt
 py -m streamlit run app.py
 ```
 
-No Windows, depois de instalar as dependencias, tambem e possivel iniciar com
-duplo clique em `iniciar_sistema.bat`.
+Também é possível abrir `iniciar_sistema.bat` no Windows.
 
-Para demonstrar a aplicacao com dados ficticios e uma base separada, execute
-`py demo.py` ou abra `iniciar_demo.bat`. A demo inicia em `http://localhost:8766`
-com usuario `demo` e senha `DemoFinanceiro2026!`. O banco `financeiro_demo.db`
-nao contem nem altera os dados reais.
+## Demonstração com dados fictícios
 
-### Executavel Windows da demonstracao
+1. Execute `py demo.py` ou abra `iniciar_demo.bat`.
+2. Aguarde o navegador abrir em `http://localhost:8766`.
+3. Entre com usuário `demo` e senha `DemoFinanceiro2026!`.
+4. Experimente os filtros, cadastre uma transação ou meta e baixe o Excel/PDF.
+5. Feche a janela do terminal para encerrar a demonstração.
 
-Para gerar um executavel independente (Windows 64 bits), execute
-`build_demo_exe.bat`. O build instala os pacotes listados em
-`requirements-build.txt` e grava o resultado em `dist/FinanceiroDemo.exe`.
-Abra o executavel para iniciar o dashboard no navegador em
-`http://localhost:8766`. A base demonstrativa fica em
-`%LOCALAPPDATA%\FinanceiroDemo\financeiro_demo.db`, separada do banco real.
-Mantenha o console aberto enquanto usa a demonstracao; feche-o para encerrar.
+A demonstração usa `financeiro_demo.db`, separada do banco local normal. As credenciais são públicas e os dados são fictícios: use apenas para demonstração local. Não publique essa configuração como serviço compartilhado nem use dados reais; isso requer configuração de implantação, credenciais e armazenamento apropriados.
 
-O executavel e um artefato de distribuicao local e nao e versionado no Git.
-Para compilar em Windows, use Windows e uma instalacao Python compativel com
-PyInstaller.
+## Executável Windows da demonstração
 
-Crie uma conta ou entre na tela inicial. Os downloads respeitam o periodo e a
-categoria selecionados e incluem somente transacoes da conta autenticada.
-Os arquivos XLSX e PDF sao gerados em memoria, sem gravar copias no projeto.
+Em Windows 64 bits, execute `build_demo_exe.bat`. O arquivo será criado em `dist/FinanceiroDemo.exe`; os dados ficam em `%LOCALAPPDATA%\FinanceiroDemo\financeiro_demo.db`. Mantenha o terminal aberto enquanto usa o programa e feche-o para encerrar.
+
+## Estrutura
+
+- `app.py`: interface Streamlit.
+- `auth.py`: cadastro e autenticação.
+- `services.py`: operações financeiras e consultas com escopo por usuário.
+- `relatorios.py`: relatório mensal e exportações.
+- `metas.py`: metas e aportes.
+- `database.py`: esquema e migrações SQLite.
+- `demo.py`: preparação dos dados fictícios e inicialização local.
 
 ## Testes
 
-```bash
-py -m pytest test.py test_services.py
+Para executar os testes automatizados:
+
+```powershell
+py -m pytest test_calculos_basicos.py test_services.py
 ```
 
-Os testes usam bancos temporarios e nao alteram `financeiro.db`.
+Os testes usam bancos temporários e não alteram `financeiro.db`.
+
