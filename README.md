@@ -51,11 +51,21 @@ Gráfico mensal e resumo de receitas, despesas e saldo.
 
 ![Resumo financeiro mensal](docs/screenshots/relatorio-mensal.png)
 
-### Exportação
+### Exportação para Excel e PDF
 
-Esta captura mostra os botões para baixar os relatórios em Excel e PDF.
+Os exemplos abaixo foram gerados pelos exportadores do projeto usando dados totalmente fictícios. As prévias mostram o conteúdo dos arquivos reais disponíveis para download.
 
-![Botões para exportar em Excel e PDF](docs/screenshots/exportacao.png)
+#### Prévia do PDF
+
+![Prévia do relatório PDF exportado](docs/screenshots/exportacao-pdf.png)
+
+[Baixar exemplo em PDF](docs/exemplos/relatorio-exemplo.pdf)
+
+#### Prévia do Excel
+
+![Prévia da planilha Excel exportada](docs/screenshots/exportacao-excel.png)
+
+[Baixar exemplo em Excel](docs/exemplos/relatorio-exemplo.xlsx)
 
 ## Executar localmente
 
