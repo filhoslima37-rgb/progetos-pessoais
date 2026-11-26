@@ -8,6 +8,14 @@ A tela principal reúne os indicadores do período, a tabela de transações e o
 
 ## Capturas de tela
 
+### Cadastro de conta
+
+![Cadastro de conta](docs/screenshots/cadastro.png)
+
+### Dashboard autenticado
+
+![Dashboard com filtros, indicadores, transações e gráfico](docs/screenshots/dashboard.png)
+
 ### Login
 
 ![Tela de login](docs/screenshots/login.png)
