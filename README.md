@@ -8,30 +8,37 @@ A tela principal reúne os indicadores do período, a tabela de transações e o
 
 ## Capturas de tela
 
-### Cadastro de conta
+### 1. Dashboard
 
-![Cadastro de conta](docs/screenshots/cadastro.png)
+Visão geral com indicadores financeiros, filtros e gráfico mensal.
 
-### Dashboard autenticado
+![Dashboard do sistema](docs/screenshots/dashboard.png)
 
-![Dashboard com filtros, indicadores, transações e gráfico](docs/screenshots/dashboard.png)
+### 2. Transações
 
-### Login
+Cadastro de receitas e despesas na barra lateral e tabela de lançamentos.
 
-![Tela de login](docs/screenshots/login.png)
+![Cadastro e tabela de transações](docs/screenshots/dashboard.png)
 
-### Transações por mês
+### 3. Metas
 
-![Gráfico de receitas e despesas por mês](docs/screenshots/transacoes-mensais.png)
+Acompanhamento dos objetivos financeiros.
 
-### Relatório mensal
+![Metas financeiras](docs/screenshots/metas-financeiras.png)
 
-![Resumo financeiro mensal e exportações](docs/screenshots/relatorio-mensal.png)
+### 4. Relatórios
 
-### Metas financeiras
+Gráfico de receitas e despesas, resumo mensal e saldo.
 
-![Seção de metas financeiras](docs/screenshots/metas-financeiras.png)
+![Gráficos e resultados financeiros](docs/screenshots/transacoes-mensais.png)
 
+![Resumo financeiro mensal](docs/screenshots/relatorio-mensal.png)
+
+### 5. Exportação
+
+Os botões permitem baixar os relatórios em Excel e PDF.
+
+![Exportação dos relatórios em Excel e PDF](docs/screenshots/relatorio-mensal.png)
 ## Recursos
 
 - Conta de usuário com senha armazenada em hash PBKDF2-SHA256.
