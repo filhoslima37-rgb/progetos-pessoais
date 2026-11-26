@@ -1,4 +1,5 @@
 import sqlite3
+import os
 from contextlib import closing
 from pathlib import Path
 
@@ -8,7 +9,9 @@ DB_PATH = Path(__file__).resolve().with_name("financeiro.db")
 
 def conectar(caminho=None):
     """Abre uma conexão SQLite com chaves estrangeiras habilitadas."""
-    conexao = sqlite3.connect(DB_PATH if caminho is None else caminho)
+    if caminho is None:
+        caminho = os.environ.get("FINANCEIRO_DB_PATH", DB_PATH)
+    conexao = sqlite3.connect(caminho)
     conexao.row_factory = sqlite3.Row
     conexao.execute("PRAGMA foreign_keys = ON")
     return conexao

@@ -18,6 +18,7 @@ from services import (
 )
 from relatorios import gerar_excel, gerar_pdf, obter_relatorio
 from metas import criar_meta, editar_meta, excluir_meta, listar_metas, registrar_economia
+from demo import preparar_demo
 
 
 SENHA_TESTE = "Senha forte 123!"
@@ -350,3 +351,19 @@ def test_rejeita_dados_invalidos_de_meta(banco, usuario, nome, valor, prazo):
 def test_operacoes_de_meta_exigem_usuario_existente(banco):
     with pytest.raises(PermissionError):
         listar_metas(123456, banco)
+
+
+def test_dados_de_demo_sao_isolados_e_preparacao_e_idempotente(tmp_path):
+    caminho_demo = tmp_path / "financeiro_demo.db"
+    usuario_id = preparar_demo(caminho_demo)
+    assert preparar_demo(caminho_demo) == usuario_id
+
+    with conectar(caminho_demo) as conexao:
+        total_transacoes = conexao.execute(
+            "SELECT COUNT(*) FROM transacoes WHERE usuario_id = ?", (usuario_id,)
+        ).fetchone()[0]
+        total_metas = conexao.execute(
+            "SELECT COUNT(*) FROM metas WHERE usuario_id = ?", (usuario_id,)
+        ).fetchone()[0]
+    assert total_transacoes == 9
+    assert total_metas == 2

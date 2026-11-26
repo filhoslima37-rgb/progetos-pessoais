@@ -35,6 +35,11 @@ py -m streamlit run app.py
 No Windows, depois de instalar as dependencias, tambem e possivel iniciar com
 duplo clique em `iniciar_sistema.bat`.
 
+Para demonstrar a aplicacao com dados ficticios e uma base separada, execute
+`py demo.py` ou abra `iniciar_demo.bat`. A demo inicia em `http://localhost:8766`
+com usuario `demo` e senha `DemoFinanceiro2026!`. O banco `financeiro_demo.db`
+nao contem nem altera os dados reais.
+
 Crie uma conta ou entre na tela inicial. Os downloads respeitam o periodo e a
 categoria selecionados e incluem somente transacoes da conta autenticada.
 Os arquivos XLSX e PDF sao gerados em memoria, sem gravar copias no projeto.
